@@ -8,7 +8,7 @@
                 <ul v-show="!mobile">
                     <router-link class="link" :to="{name: 'Home'}">Home</router-link>
                     <router-link class="link" :to="{name: 'Blogs'}">Blogs</router-link>
-                    <router-link to="#" class="link" >Create Post</router-link>
+                    <router-link :to="{name: 'CreatePost'}" class="link" >Create Post</router-link>
                     <router-link v-if="!user" class="link" :to="{name: 'Login'}">Login/Register</router-link>                
                 </ul>
                 <div v-if="user" @click="toggleProfileMenu" class="profile" ref="profile">
@@ -24,13 +24,13 @@
                         </div>
                         <div class="options">
                             <div class="option">
-                                <router-link class="option" to="#">
+                                <router-link class="option" :to="{ name: 'Profile' }">
                                     <userIcon class="icon"/>
                                     <p>Profile</p>
                                 </router-link>
                             </div>
                             <div class="option">
-                                <router-link class="option" to="#">
+                                <router-link class="option" :to="{ name: 'Admin' }">
                                     <adminIcon class="icon"/>
                                     <p>Admin</p>
                                 </router-link>
@@ -49,7 +49,7 @@
             <ul class="mobile-nav" v-show="mobileNav">
                     <router-link class="link" :to="{name: 'Home'}">Home</router-link>
                     <router-link class="link" :to="{name: 'Blogs'}">Blogs</router-link>
-                    <router-link class="link" to="#">Create Post</router-link>
+                    <router-link class="link" :to="{name: 'CreatePost'}">Create Post</router-link>
                     <router-link v-if="!user" class="link" :to="{name: 'Login'}">Login/Register</router-link>                            
             </ul>
         </transition>

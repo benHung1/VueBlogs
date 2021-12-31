@@ -14,6 +14,11 @@ export default new Vuex.Store({
       { blogTitle: "Blog Card #3", blogCoverPhoto: "stock-3", blogDate: "May 1 ,2021"},
       { blogTitle: "Blog Card #4", blogCoverPhoto: "stock-4", blogDate: "May 1 ,2021"},        
     ],
+    blogHTML:"Write your blog title here",
+    blogTitle:"",
+    blogPhotoName: "",
+    blogPhotoFileURL: null,
+    blogPhotoPreview: null,
     editPost: null,
     user: null,
     profileEmail: null,
@@ -21,7 +26,7 @@ export default new Vuex.Store({
     profileLastName: null,
     profileUsername: null,
     profileId: null,
-    profileIniitials: null,
+    profileInitials: null,
   },
   mutations: {
     toggleEditPost(state, payload){
@@ -42,6 +47,16 @@ export default new Vuex.Store({
         state.profileFirstName.match(/(\b\S)?/g).join("") +
         state.profileLastName.match(/(\b\S)?/g).join("");
     },
+    changeFirstName(state, payload){
+      state.profileFirstName = payload;
+    },
+    changeLastName(state, payload){
+      state.profileLastName = payload;
+    },
+    changeUsername(state, payload){
+      state.profileUsername = payload;
+    },
+
 
   },
   actions: {
@@ -50,9 +65,16 @@ export default new Vuex.Store({
       const dbResults = await dataBase.get();
       commit("setProfileInfo", dbResults);
       commit("setProfileInitials");
-      console.log(dbResults);
+    },
+    async updateUserSettings({ commit, state }){
+      const dataBase = await db.collection("users").doc(state.profileId);await dataBase.update({
+        firstName: state.profileFirstName,
+        lastName: state.profileLastName,
+        username: state.profileUsername,
+      });
+      commit("setProfileInitials");
     },
   },
   modules: {
-  }
-})
+  },
+});
