@@ -47,9 +47,9 @@
         <menuIcon @click="toggleMobileNav" class="menu-icon" v-show="mobile"/>
         <transition name="mobile-nav">
             <ul class="mobile-nav" v-show="mobileNav">
-                    <router-link class="link" :to="{name: 'Home'}">Home</router-link>
-                    <router-link class="link" :to="{name: 'Blogs'}">Blogs</router-link>
-                    <router-link class="link" :to="{name: 'CreatePost'}">Create Post</router-link>
+                    <router-link  class="link" :to="{name: 'Home'}">Home</router-link>
+                    <router-link v-if="user" class="link" :to="{name: 'Blogs'}">Blogs</router-link>
+                    <router-link v-if="user" class="link" :to="{name: 'CreatePost'}">Create Post</router-link>
                     <router-link v-if="!user" class="link" :to="{name: 'Login'}">Login/Register</router-link>                            
             </ul>
         </transition>
@@ -143,6 +143,7 @@ export default {
                 }
             }
             .nav-links{
+                z-index: 9;
                 position: relative;
                 display: flex;
                 flex: 1;
@@ -243,12 +244,13 @@ export default {
         .menu-icon{
             cursor: pointer;
             position: absolute;
-            top: 32px;
-            right: 25px;
+            top: 0px;
+            right: 0px;
             height:25px;
             width:auto;
         }
         .mobile-nav{
+            z-index: 9;
             padding: 20px;
             width: 70%;
             max-width: 250px;
