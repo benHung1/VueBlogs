@@ -1,4 +1,5 @@
 module.exports = {
+  publicPath: '/VueBlogs/',
   chainWebpack: (config) => {
     const svgRule = config.module.rule("svg");
 
